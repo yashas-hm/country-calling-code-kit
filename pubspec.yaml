@@ -1,7 +1,7 @@
 name: country_calling_code_kit
 description: "A new Flutter project"
 version: 1.0.0
-#homepage:
+repository: https://github.com/yashas-hm/country-calling-code-kit
 
 platforms:
   android:
