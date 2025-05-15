@@ -1,4 +1,3 @@
-/// Widget components for the country_calling_code_kit package.
 library;
 
 import 'dart:io';

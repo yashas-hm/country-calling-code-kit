@@ -5,7 +5,7 @@
 Tired of boring dropdowns and confusing country pickers? Say hello to your new favorite Flutter package, the ultimate
 toolkit for selecting country calling codes with flair! 🌍✨
 
-<img src="./gitassets/ss1.png" width="150"> <img src="./gitassets/ss2.png" width="150"> <img src="./gitassets/ss3.png" width="150">
+<img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss1.png" width="150"> <img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss2.png" width="150"> <img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss3.png" width="150">
 
 ## 💡 Features You'll Love
 
@@ -39,59 +39,39 @@ import 'package:country_calling_code_kit/country_calling_code_kit.dart';
 ### Get the default country (based on device settings)
 
 ```dart
-
-Country? country = await
-
-getDefaultCountry();
+void main() async {
+  Country? country = await getDefaultCountry();
+}
 ```
 
 ### Show country picker dialog
 
 ```dart
-
-Country? selectedCountry = await
-showCountryPickerDialog
-(
-context: context);
-if (selectedCountry != null) {
-// Use the selected country
-print('Selected country: ${selectedCountry.name}');
-print('Country code: ${selectedCountry.countryCode}');
-print('Calling code: ${selectedCountry.callCode}');
+void main() async {
+  Country? selectedCountry = await showCountryPickerDialog(context: context);
+  if (selectedCountry != null) {
+    // Use the selected country
+    print('Selected country: ${selectedCountry.name}');
+    print('Country code: ${selectedCountry.countryCode}');
+    print('Calling code: ${selectedCountry.callCode}');
+  }
 }
+
 ```
 
 ### Show a country picker bottom sheet
 
 ```dart
 
-Country? selectedCountry = await
-showCountryPickerModalSheet
-(
-context: context);
-if (selectedCountry != null) {
-// Use the selected country
-print('Selected country: ${selectedCountry.name}');
-print('Country code: ${selectedCountry.countryCode}');
-print('Calling code: ${selectedCountry.callCode}');
+void main() async {
+  Country? selectedCountry = await showCountryPickerModalSheet(context: context);
+  if (selectedCountry != null) {
+    // Use the selected country
+    print('Selected country: ${selectedCountry.name}');
+    print('Country code: ${selectedCountry.countryCode}');
+    print('Calling code: ${selectedCountry.callCode}');
+  }
 }
-```
-
-### Display a country flag
-
-```dart
-Image.asset
-(
-country.flag,
-width: 32,
-height: 32,
-package
-:
-'
-country_calling_code_kit
-'
-,
-)
 ```
 
 ## Example

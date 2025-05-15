@@ -1,4 +1,3 @@
-/// Constants used throughout the country_calling_code_kit package.
 library;
 
 import 'package:country_calling_code_kit/src/core/country.dart';

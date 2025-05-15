@@ -7,6 +7,11 @@
   * Display of country flags, names, and calling codes
   * Support for all major platforms (Android, iOS, Web, macOS, Linux, Windows)
 
-## Credits
+## 1.0.1
 
-This package is inspired by and gives credit to [country_calling_code_picker](https://pub.dev/packages/country_calling_code_picker).
+* README update
+
+## 1.0.2
+
+* Bug Fixes
+* Added Documentation

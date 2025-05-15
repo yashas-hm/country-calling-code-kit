@@ -1,4 +1,3 @@
-/// Utility functions for working with country data.
 library;
 
 import 'package:country_calling_code_kit/src/core/constants.dart';

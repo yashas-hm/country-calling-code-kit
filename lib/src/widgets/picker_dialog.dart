@@ -1,4 +1,5 @@
-/// Dialog-related widgets and functions for country selection.
+library;
+
 import 'package:country_calling_code_kit/src/core/country.dart';
 import 'package:country_calling_code_kit/src/widgets/picker_widget.dart';
 import 'package:flutter/material.dart';
