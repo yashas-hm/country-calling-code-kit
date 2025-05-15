@@ -5,9 +5,7 @@
 Tired of boring dropdowns and confusing country pickers? Say hello to your new favorite Flutter package, the ultimate
 toolkit for selecting country calling codes with flair! 🌍✨
 
-<img src="./gitassets/ss1.png" width="150">
-<img src="./gitassets/ss2.png" width="150">
-<img src="./gitassets/ss3.png" width="150">
+<img src="./gitassets/ss1.png" width="150"> <img src="./gitassets/ss2.png" width="150"> <img src="./gitassets/ss3.png" width="150">
 
 ## 💡 Features You'll Love
 
