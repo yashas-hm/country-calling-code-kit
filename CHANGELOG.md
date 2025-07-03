@@ -15,3 +15,8 @@
 
 * Bug Fixes
 * Added Documentation
+
+## 1.1.0
+
+* Bug Fixes
+* Ability to change corner radius for flag images

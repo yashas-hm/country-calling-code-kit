@@ -35,6 +35,7 @@ class CountryPicker extends StatefulWidget {
   /// - [preferredCountries]: List of country codes to display at the top of the list
   /// - [showCallCode]: Whether to show calling codes next to country names
   /// - [search]: Whether to show the search bar
+  /// - [flagCornerRadius]: Corner Radius for flag images
   const CountryPicker({
     super.key,
     required this.onSelected,
@@ -45,6 +46,7 @@ class CountryPicker extends StatefulWidget {
     this.splashColor,
     this.hoverColor,
     this.preferredCountries,
+    this.flagCornerRadius,
     this.showCallCode = false,
     this.search = true,
   });
@@ -99,6 +101,11 @@ class CountryPicker extends StatefulWidget {
   ///
   /// Defaults to true.
   final bool search;
+
+  /// Flag images corner radius for a less edgy look
+  ///
+  /// Defaults to zero
+  final double? flagCornerRadius;
 
   @override
   State<CountryPicker> createState() => _CountryPickerState();
@@ -293,11 +300,15 @@ class _CountryPickerState extends State<CountryPicker> {
                       mainAxisSize: MainAxisSize.max,
                       spacing: 15,
                       children: [
-                        Image.asset(
-                          filteredCountries[index].flag,
-                          fit: BoxFit.fill,
-                          height: widget.imageSize?.height ?? 25,
-                          width: widget.imageSize?.width ?? 40,
+                        ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(widget.flagCornerRadius??0),
+                          child: Image.asset(
+                            filteredCountries[index].flag,
+                            fit: BoxFit.fill,
+                            height: widget.imageSize?.height ?? 25,
+                            width: widget.imageSize?.width ?? 40,
+                          ),
                         ),
                         Expanded(
                           child: Container(

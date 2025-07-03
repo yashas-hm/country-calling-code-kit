@@ -1,6 +1,6 @@
 name: country_calling_code_kit
 description: "A sleek Flutter package for picking country codes with flags, names, and dial codes. Customizable UI, platform-ready, and user-friendly."
-version: 1.0.2
+version: 1.1.0
 repository: https://github.com/yashas-hm/country-calling-code-kit
 
 platforms:

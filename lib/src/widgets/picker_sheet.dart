@@ -35,10 +35,9 @@ import 'package:flutter/material.dart';
 /// - [preferredCountries]: List of country codes to display at the top of the list
 /// - [showCallCode]: Whether to show calling codes next to country names (defaults to true)
 /// - [search]: Whether to show the search bar (defaults to true)
-/// - [returnOnlyCallCode]: If true, returns only the calling code string instead of the Country object
+/// - [flagCornerRadius]: Corner Radius for flag images
 ///
-/// Returns a [Future] that completes with the selected [Country] object,
-/// or with the calling code string if [returnOnlyCallCode] is true,
+/// Returns a [Future] that completes with the selected [Country] object
 /// or with `null` if the modal sheet is dismissed without selection.
 Future<Country?> showCountryPickerModalSheet({
   required BuildContext context,
@@ -51,7 +50,7 @@ Future<Country?> showCountryPickerModalSheet({
   List<CountryCode>? preferredCountries,
   bool showCallCode = true,
   bool search = true,
-  bool returnOnlyCallCode = false,
+  double? flagCornerRadius,
 }) =>
     showModalBottomSheet(
       context: context,
@@ -67,7 +66,7 @@ Future<Country?> showCountryPickerModalSheet({
       ),
       builder: (ctx) => CountryPicker(
         onSelected: (country) => Navigator.of(ctx)
-            .pop(returnOnlyCallCode ? country.callCode : country),
+            .pop(country),
         countryNameTextStyle: countryNameTextStyle,
         countryCallCodeTextStyle: countryCallCodeTextStyle,
         imageSize: imageSize,
@@ -77,5 +76,6 @@ Future<Country?> showCountryPickerModalSheet({
         preferredCountries: preferredCountries,
         showCallCode: showCallCode,
         search: search,
+        flagCornerRadius: flagCornerRadius,
       ),
     );
