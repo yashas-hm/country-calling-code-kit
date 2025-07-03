@@ -301,8 +301,8 @@ class _CountryPickerState extends State<CountryPicker> {
                       spacing: 15,
                       children: [
                         ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(widget.flagCornerRadius??0),
+                          borderRadius: BorderRadius.circular(
+                              widget.flagCornerRadius ?? 0),
                           child: Image.asset(
                             filteredCountries[index].flag,
                             fit: BoxFit.fill,

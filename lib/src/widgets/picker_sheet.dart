@@ -65,8 +65,7 @@ Future<Country?> showCountryPickerModalSheet({
         ),
       ),
       builder: (ctx) => CountryPicker(
-        onSelected: (country) => Navigator.of(ctx)
-            .pop(country),
+        onSelected: (country) => Navigator.of(ctx).pop(country),
         countryNameTextStyle: countryNameTextStyle,
         countryCallCodeTextStyle: countryCallCodeTextStyle,
         imageSize: imageSize,
