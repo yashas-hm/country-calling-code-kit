@@ -1,0 +1,18 @@
+CODEOWNERS
+  h_489c0496f9f57d 1
+.github/workflows/flutter_validation.yml
+  h_489c0496f9f57d 1-28
+.github/dependabot.yml
+  h_489c0496f9f57d 1-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5316b9a551fe01d1baf7a0a3196261d745ffb496",
+  "prompts": {},
+  "humans": {
+    "h_489c0496f9f57d": {
+      "author": "Yashas H Majmudar <yashashm.dev@gmail.com>"
+    }
+  }
+}
