@@ -3,18 +3,18 @@ library;
 import 'package:country_calling_code_kit/src/core/constants.dart';
 import 'package:country_calling_code_kit/src/core/country.dart';
 import 'package:country_calling_code_kit/src/core/extensions.dart';
-import 'package:device_region/device_region.dart';
+import 'package:flutter/widgets.dart';
 
-/// Attempts to get the default country based on the device's SIM card.
+/// Attempts to get the default country based on the device's locale.
 ///
-/// This function uses the device_region package to get the SIM country code
-/// and then finds the corresponding Country object.
+/// This function reads the region of the platform locale
+/// ([WidgetsBinding.platformDispatcher]) and finds the corresponding Country
+/// object. It uses no platform plugins, so it works on every supported platform
+/// (including Web and WASM) without native code or permissions.
 ///
 /// Returns a [Country] object if successful, or `null` if:
-/// - The device doesn't have a SIM card
-/// - The SIM country code couldn't be determined
-/// - An error occurred during the process
-/// - No matching country was found for the SIM country code
+/// - The locale has no region/country component
+/// - No matching country was found for the locale's country code
 ///
 /// Example:
 /// ```dart
@@ -26,14 +26,12 @@ import 'package:device_region/device_region.dart';
 /// }
 /// ```
 Future<Country?> getDefaultCountry() async {
-  try {
-    final countryCode = await DeviceRegion.getSIMCountryCode();
-    return countries.firstWhereOrNull(
-      (element) => element.countryCode == CountryCode.fromString(countryCode),
-    );
-  } catch (e) {
-    return null;
-  }
+  final countryCode =
+      WidgetsBinding.instance.platformDispatcher.locale.countryCode;
+  if (countryCode == null) return null;
+  return countries.firstWhereOrNull(
+    (element) => element.countryCode == CountryCode.fromString(countryCode),
+  );
 }
 
 /// Finds a [Country] by its [CountryCode].

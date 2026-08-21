@@ -1,7 +1,5 @@
 library;
 
-import 'dart:io';
-
 import 'package:country_calling_code_kit/src/core/constants.dart';
 import 'package:country_calling_code_kit/src/core/country.dart';
 import 'package:country_calling_code_kit/src/core/utils.dart';
@@ -36,6 +34,7 @@ class CountryPicker extends StatefulWidget {
   /// - [showCallCode]: Whether to show calling codes next to country names
   /// - [search]: Whether to show the search bar
   /// - [flagCornerRadius]: Corner Radius for flag images
+  /// - [itemBorderRadius]: Corner radius for each country list item
   const CountryPicker({
     super.key,
     required this.onSelected,
@@ -47,8 +46,10 @@ class CountryPicker extends StatefulWidget {
     this.hoverColor,
     this.preferredCountries,
     this.flagCornerRadius,
+    this.itemBorderRadius,
     this.showCallCode = false,
     this.search = true,
+    this.noBottomPadding = false,
   });
 
   /// Callback that is called when a country is selected.
@@ -107,6 +108,17 @@ class CountryPicker extends StatefulWidget {
   /// Defaults to zero
   final double? flagCornerRadius;
 
+  /// Corner radius for each country list item's tap area.
+  ///
+  /// Defaults to 10.
+  final double? itemBorderRadius;
+
+  /// Whether to remove the bottom padding of the picker.
+  ///
+  /// Internal use only. Set to `true` by [showCountryPickerModalSheet] so the
+  /// list sits flush with the sheet's bottom edge. Defaults to `false`.
+  final bool noBottomPadding;
+
   @override
   State<CountryPicker> createState() => _CountryPickerState();
 }
@@ -148,7 +160,9 @@ class _CountryPickerState extends State<CountryPicker> {
       }
     }
 
-    if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
+    if (!kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.iOS ||
+            defaultTargetPlatform == TargetPlatform.android)) {
       final defCountry = await getDefaultCountry();
       if (defCountry != null) {
         list = countries
@@ -190,8 +204,8 @@ class _CountryPickerState extends State<CountryPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+    return Container(
+      padding: EdgeInsets.fromLTRB(10, 20, 10, widget.noBottomPadding ? 0 : 20),
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 600),
         child: Column(
@@ -234,6 +248,21 @@ class _CountryPickerState extends State<CountryPicker> {
                             border: OutlineInputBorder(
                               borderSide: BorderSide.none,
                             ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
                             isDense: true,
                             contentPadding: EdgeInsets.zero,
                           ),
@@ -245,13 +274,15 @@ class _CountryPickerState extends State<CountryPicker> {
                     if (textEditController.text.isNotEmpty)
                       InkWell(
                         borderRadius: BorderRadius.circular(50),
-                        hoverColor: Platform.isAndroid || Platform.isIOS
-                            ? null
-                            : widget.hoverColor ??
-                                Theme.of(context)
-                                    .colorScheme
-                                    .secondary
-                                    .withValues(alpha: 0.1),
+                        hoverColor:
+                            defaultTargetPlatform == TargetPlatform.android ||
+                                    defaultTargetPlatform == TargetPlatform.iOS
+                                ? null
+                                : widget.hoverColor ??
+                                    Theme.of(context)
+                                        .colorScheme
+                                        .secondary
+                                        .withValues(alpha: 0.1),
                         splashColor: widget.splashColor ??
                             Theme.of(context).primaryColor,
                         onTap: () {
@@ -279,8 +310,12 @@ class _CountryPickerState extends State<CountryPicker> {
               child: ListView.builder(
                 padding: EdgeInsets.zero,
                 itemCount: filteredCountries.length,
+                clipBehavior: Clip.antiAlias,
                 itemBuilder: (_, index) => InkWell(
-                  hoverColor: Platform.isAndroid || Platform.isIOS
+                  borderRadius:
+                      BorderRadius.circular(widget.itemBorderRadius ?? 10),
+                  hoverColor: defaultTargetPlatform == TargetPlatform.android ||
+                          defaultTargetPlatform == TargetPlatform.iOS
                       ? null
                       : widget.hoverColor ??
                           Theme.of(
