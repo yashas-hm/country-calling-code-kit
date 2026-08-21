@@ -9,13 +9,11 @@ codes. Present it as a dialog or a bottom sheet, tailor it to your app's design,
   <a href="https://pub.dev/packages/country_calling_code_kit"><img src="https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Web%20%7C%20macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg" alt="platforms"></a>
 </p>
 
-<table width="100%">
-  <tr>
-    <td width="33.33%" align="center"><img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss1.png" width="150" alt="image1"></td>
-    <td width="33.33%" align="center"><img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss2.png" width="150" alt="image2"></td>
-    <td width="33.33%" align="center"><img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss3.png" width="150" alt="image3"></td>
-  </tr>
-</table>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss1.png" width="150" alt="image1">
+    <img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss2.png" width="150" alt="image2"> 
+    <img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss3.png" width="150" alt="image3">
+</p>
 
 ## Features
 
