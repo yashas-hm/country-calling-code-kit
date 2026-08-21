@@ -3,9 +3,11 @@
 A sleek, customizable Flutter package for picking country calling codes — complete with flags, country names, and dial
 codes. Present it as a dialog or a bottom sheet, tailor it to your app's design, and ship to every Flutter platform.
 
-[![pub package](https://img.shields.io/pub/v/country_calling_code_kit.svg)](https://pub.dev/packages/country_calling_code_kit)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yashas-hm/country-calling-code-kit/blob/main/LICENSE)
-[![platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Web%20%7C%20macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg)](https://pub.dev/packages/country_calling_code_kit)
+<p align="center">
+  <a href="https://pub.dev/packages/country_calling_code_kit"><img src="https://img.shields.io/pub/v/country_calling_code_kit.svg" alt="pub package"></a>
+  <a href="https://github.com/yashas-hm/country-calling-code-kit/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license"></a>
+  <a href="https://pub.dev/packages/country_calling_code_kit"><img src="https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Web%20%7C%20macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg" alt="platforms"></a>
+</p>
 
 <img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss1.png" width="150" alt="image1">
 <img src="https://raw.githubusercontent.com/yashas-hm/country-calling-code-kit/refs/heads/main/gitassets/ss2.png" width="150" alt="image2"> 
