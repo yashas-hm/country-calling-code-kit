@@ -1,20 +1,17 @@
+import 'dart:ui';
+
 import 'package:country_calling_code_kit/country_calling_code_kit.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
+  final binding = TestWidgetsFlutterBinding.ensureInitialized();
 
-  const channel = MethodChannel('device_region');
-
-  void mockSimCountryCode(Object? Function(MethodCall call) handler) {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(channel, (call) async => handler(call));
+  void mockLocale(Locale locale) {
+    binding.platformDispatcher.localeTestValue = locale;
   }
 
   tearDown(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(channel, null);
+    binding.platformDispatcher.clearLocaleTestValue();
   });
 
   group('getCountryByCountryCode', () {
@@ -37,60 +34,38 @@ void main() {
   });
 
   group('getDefaultCountry', () {
-    test('returns the matching country for a valid SIM country code', () async {
-      mockSimCountryCode((_) => 'fr');
+    test('returns the matching country for a valid locale region', () async {
+      mockLocale(const Locale('fr', 'FR'));
 
       final result = await getDefaultCountry();
 
       expect(result?.countryCode, CountryCode.fr);
     });
 
-    test('matches the SIM country code case-insensitively', () async {
-      mockSimCountryCode((_) => 'GB');
+    test('matches the locale region case-insensitively', () async {
+      mockLocale(const Locale('en', 'GB'));
 
       final result = await getDefaultCountry();
 
       expect(result?.countryCode, CountryCode.gb);
     });
 
-    test('falls back to the first country when the SIM country code is null',
-        () async {
-      mockSimCountryCode((_) => null);
+    test('returns null when the locale has no region', () async {
+      mockLocale(const Locale('en'));
 
       final result = await getDefaultCountry();
 
-      expect(result?.countryCode, CountryCode.values.first);
+      expect(result, isNull);
     });
 
     test(
-        'falls back to the first country when the SIM country code is unrecognized',
+        'falls back to the first country when the locale region is unrecognized',
         () async {
-      mockSimCountryCode((_) => 'zz-unknown');
+      mockLocale(const Locale('en', 'ZZ'));
 
       final result = await getDefaultCountry();
 
       expect(result?.countryCode, CountryCode.values.first);
-    });
-
-    test('returns null when the platform channel throws', () async {
-      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-          .setMockMethodCallHandler(channel, (call) async {
-        throw PlatformException(code: 'UNAVAILABLE');
-      });
-
-      final result = await getDefaultCountry();
-
-      expect(result, isNull);
-    });
-
-    test('returns null when no platform implementation is registered',
-        () async {
-      // No mock handler installed for this test: invoking the channel
-      // throws a MissingPluginException, which getDefaultCountry should
-      // swallow and translate into a null result.
-      final result = await getDefaultCountry();
-
-      expect(result, isNull);
     });
   });
 }

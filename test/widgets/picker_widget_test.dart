@@ -2,6 +2,8 @@ import 'package:country_calling_code_kit/country_calling_code_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../support/desktop_test_widgets.dart';
+
 void main() {
   Widget wrap(Widget child, {ThemeData? theme}) => MaterialApp(
         theme: theme,
@@ -9,7 +11,8 @@ void main() {
       );
 
   group('CountryPicker', () {
-    testWidgets('renders the full country list with a search bar by default', (
+    desktopTestWidgets(
+        'renders the full country list with a search bar by default', (
       tester,
     ) async {
       await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
@@ -18,7 +21,8 @@ void main() {
       expect(find.text('Afghanistan'), findsOneWidget);
     });
 
-    testWidgets('hides the search bar when search is false', (tester) async {
+    desktopTestWidgets('hides the search bar when search is false',
+        (tester) async {
       await tester.pumpWidget(
         wrap(CountryPicker(onSelected: (_) {}, search: false)),
       );
@@ -27,7 +31,8 @@ void main() {
       expect(find.text('Afghanistan'), findsOneWidget);
     });
 
-    testWidgets('filters the list by country name prefix, case-insensitively', (
+    desktopTestWidgets(
+        'filters the list by country name prefix, case-insensitively', (
       tester,
     ) async {
       await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
@@ -40,7 +45,8 @@ void main() {
       expect(find.text('Afghanistan'), findsNothing);
     });
 
-    testWidgets('filters the list by ISO country code prefix', (tester) async {
+    desktopTestWidgets('filters the list by ISO country code prefix',
+        (tester) async {
       await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
 
       await tester.enterText(find.byType(TextField), 'us');
@@ -53,7 +59,8 @@ void main() {
       );
     });
 
-    testWidgets('filters the list by calling code prefix', (tester) async {
+    desktopTestWidgets('filters the list by calling code prefix',
+        (tester) async {
       await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
 
       await tester.enterText(find.byType(TextField), '+91');
@@ -63,7 +70,7 @@ void main() {
       expect(find.text('Pakistan'), findsNothing);
     });
 
-    testWidgets('shows an empty list for a query matching nothing', (
+    desktopTestWidgets('shows an empty list for a query matching nothing', (
       tester,
     ) async {
       await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
@@ -76,7 +83,7 @@ void main() {
       expect(listView.childrenDelegate.estimatedChildCount, 0);
     });
 
-    testWidgets(
+    desktopTestWidgets(
       'clears the search text and restores the full list when the clear icon is tapped',
       (tester) async {
         await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
@@ -95,7 +102,7 @@ void main() {
       },
     );
 
-    testWidgets('hides the clear icon when the search text is empty', (
+    desktopTestWidgets('hides the clear icon when the search text is empty', (
       tester,
     ) async {
       await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
@@ -103,7 +110,8 @@ void main() {
       expect(find.byIcon(Icons.clear), findsNothing);
     });
 
-    testWidgets('uses a custom searchFilter when provided', (tester) async {
+    desktopTestWidgets('uses a custom searchFilter when provided',
+        (tester) async {
       await tester.pumpWidget(
         wrap(
           CountryPicker(
@@ -122,7 +130,7 @@ void main() {
       expect(find.text('Afghanistan'), findsNothing);
     });
 
-    testWidgets('custom searchFilter also runs for an empty query', (
+    desktopTestWidgets('custom searchFilter also runs for an empty query', (
       tester,
     ) async {
       await tester.pumpWidget(
@@ -145,7 +153,8 @@ void main() {
       expect(find.text('Afghanistan'), findsNothing);
     });
 
-    testWidgets('invokes onSelected with the tapped country', (tester) async {
+    desktopTestWidgets('invokes onSelected with the tapped country',
+        (tester) async {
       Country? selected;
       await tester.pumpWidget(
         wrap(CountryPicker(onSelected: (c) => selected = c)),
@@ -158,7 +167,8 @@ void main() {
       expect(selected!.countryCode, CountryCode.af);
     });
 
-    testWidgets('invokes onSelected with a filtered result', (tester) async {
+    desktopTestWidgets('invokes onSelected with a filtered result',
+        (tester) async {
       Country? selected;
       await tester.pumpWidget(
         wrap(CountryPicker(onSelected: (c) => selected = c)),
@@ -175,7 +185,7 @@ void main() {
       expect(selected?.countryCode, CountryCode.ca);
     });
 
-    testWidgets(
+    desktopTestWidgets(
       'orders preferred countries first, preserving the given order',
       (tester) async {
         await tester.pumpWidget(
@@ -196,7 +206,8 @@ void main() {
       },
     );
 
-    testWidgets('ignores an empty preferredCountries list', (tester) async {
+    desktopTestWidgets('ignores an empty preferredCountries list',
+        (tester) async {
       await tester.pumpWidget(
         wrap(CountryPicker(onSelected: (_) {}, preferredCountries: const [])),
       );
@@ -204,7 +215,7 @@ void main() {
       expect(find.text('Afghanistan'), findsOneWidget);
     });
 
-    testWidgets('applies a custom corner radius to flag images', (
+    desktopTestWidgets('applies a custom corner radius to flag images', (
       tester,
     ) async {
       await tester.pumpWidget(
@@ -216,7 +227,8 @@ void main() {
       expect(clipRRect.borderRadius, BorderRadius.circular(12));
     });
 
-    testWidgets('defaults the flag corner radius to zero', (tester) async {
+    desktopTestWidgets('defaults the flag corner radius to zero',
+        (tester) async {
       await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
 
       final clipRRect =
@@ -224,7 +236,7 @@ void main() {
       expect(clipRRect.borderRadius, BorderRadius.circular(0));
     });
 
-    testWidgets('applies a custom image size to flags', (tester) async {
+    desktopTestWidgets('applies a custom image size to flags', (tester) async {
       await tester.pumpWidget(
         wrap(
           CountryPicker(onSelected: (_) {}, imageSize: const Size(60, 30)),
@@ -236,7 +248,7 @@ void main() {
       expect(image.height, 30);
     });
 
-    testWidgets('defaults the flag image size to 40x25', (tester) async {
+    desktopTestWidgets('defaults the flag image size to 40x25', (tester) async {
       await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
 
       final image = tester.widgetList<Image>(find.byType(Image)).first;
@@ -244,7 +256,7 @@ void main() {
       expect(image.height, 25);
     });
 
-    testWidgets('applies custom text styles for name and call code', (
+    desktopTestWidgets('applies custom text styles for name and call code', (
       tester,
     ) async {
       const nameStyle = TextStyle(fontSize: 22, color: Colors.red);
@@ -267,7 +279,7 @@ void main() {
       expect(codeText.style, codeStyle);
     });
 
-    testWidgets('applies custom splash and hover colors to list items', (
+    desktopTestWidgets('applies custom splash and hover colors to list items', (
       tester,
     ) async {
       await tester.pumpWidget(
@@ -286,7 +298,7 @@ void main() {
       expect(itemInkWell.hoverColor, Colors.orange);
     });
 
-    testWidgets('defaults splash and hover colors to the theme', (
+    desktopTestWidgets('defaults splash and hover colors to the theme', (
       tester,
     ) async {
       final theme = ThemeData(
@@ -307,7 +319,57 @@ void main() {
       );
     });
 
-    testWidgets('disposes its search controller without throwing', (
+    desktopTestWidgets('applies a custom item border radius', (tester) async {
+      await tester.pumpWidget(
+        wrap(CountryPicker(onSelected: (_) {}, itemBorderRadius: 20)),
+      );
+
+      final itemInkWell =
+          tester.widgetList<InkWell>(find.byType(InkWell)).first;
+      expect(itemInkWell.borderRadius, BorderRadius.circular(20));
+    });
+
+    desktopTestWidgets('defaults the item border radius to 10', (tester) async {
+      await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
+
+      final itemInkWell =
+          tester.widgetList<InkWell>(find.byType(InkWell)).first;
+      expect(itemInkWell.borderRadius, BorderRadius.circular(10));
+    });
+
+    desktopTestWidgets(
+        'removes the bottom padding when noBottomPadding is true',
+        (tester) async {
+      await tester.pumpWidget(
+        wrap(CountryPicker(onSelected: (_) {}, noBottomPadding: true)),
+      );
+
+      final container = tester.widget<Container>(
+        find
+            .descendant(
+              of: find.byType(CountryPicker),
+              matching: find.byType(Container),
+            )
+            .first,
+      );
+      expect(container.padding, const EdgeInsets.fromLTRB(10, 20, 10, 0));
+    });
+
+    desktopTestWidgets('keeps the bottom padding by default', (tester) async {
+      await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));
+
+      final container = tester.widget<Container>(
+        find
+            .descendant(
+              of: find.byType(CountryPicker),
+              matching: find.byType(Container),
+            )
+            .first,
+      );
+      expect(container.padding, const EdgeInsets.fromLTRB(10, 20, 10, 20));
+    });
+
+    desktopTestWidgets('disposes its search controller without throwing', (
       tester,
     ) async {
       await tester.pumpWidget(wrap(CountryPicker(onSelected: (_) {})));

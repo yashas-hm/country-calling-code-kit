@@ -2,6 +2,8 @@ import 'package:country_calling_code_kit/country_calling_code_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../support/desktop_test_widgets.dart';
+
 void main() {
   Widget harness(Future<void> Function(BuildContext context) onPressed) {
     return MaterialApp(
@@ -16,7 +18,8 @@ void main() {
     );
   }
 
-  testWidgets('opens a dialog containing the CountryPicker', (tester) async {
+  desktopTestWidgets('opens a dialog containing the CountryPicker',
+      (tester) async {
     await tester.pumpWidget(
       harness((context) => showCountryPickerDialog(context: context)),
     );
@@ -28,7 +31,7 @@ void main() {
     expect(find.text('Afghanistan'), findsOneWidget);
   });
 
-  testWidgets('resolves the returned future with the selected country', (
+  desktopTestWidgets('resolves the returned future with the selected country', (
     tester,
   ) async {
     Country? result;
@@ -48,7 +51,8 @@ void main() {
     expect(find.byType(Dialog), findsNothing);
   });
 
-  testWidgets('resolves with null when dismissed by tapping the barrier', (
+  desktopTestWidgets('resolves with null when dismissed by tapping the barrier',
+      (
     tester,
   ) async {
     Country? result;
@@ -72,7 +76,8 @@ void main() {
     expect(find.byType(Dialog), findsNothing);
   });
 
-  testWidgets('forwards preferredCountries to the picker', (tester) async {
+  desktopTestWidgets('forwards preferredCountries to the picker',
+      (tester) async {
     await tester.pumpWidget(
       harness(
         (context) => showCountryPickerDialog(
@@ -88,7 +93,7 @@ void main() {
     expect(find.text('Japan'), findsOneWidget);
   });
 
-  testWidgets('forwards search:false to the picker', (tester) async {
+  desktopTestWidgets('forwards search:false to the picker', (tester) async {
     await tester.pumpWidget(
       harness(
         (context) => showCountryPickerDialog(context: context, search: false),
@@ -99,5 +104,60 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(TextField), findsNothing);
+  });
+
+  desktopTestWidgets('constrains the dialog width to maxWidth', (tester) async {
+    // Note: Material's Dialog enforces a built-in minWidth of 280, so use a
+    // maxWidth above that floor. The default (unconstrained) width here would
+    // be shortestSide * 0.90 = 540, so 350 proves the constraint is applied.
+    await tester.pumpWidget(
+      harness(
+        (context) => showCountryPickerDialog(context: context, maxWidth: 350),
+      ),
+    );
+
+    await tester.tap(find.text('Open'));
+    await tester.pumpAndSettle();
+
+    expect(
+      tester.getSize(find.byType(CountryPicker)).width,
+      lessThanOrEqualTo(350),
+    );
+  });
+
+  desktopTestWidgets('constrains the dialog height to maxHeight',
+      (tester) async {
+    // Default height here would be screenHeight * 0.80 = 480, so 200 proves
+    // the constraint is applied.
+    await tester.pumpWidget(
+      harness(
+        (context) => showCountryPickerDialog(context: context, maxHeight: 200),
+      ),
+    );
+
+    await tester.tap(find.text('Open'));
+    await tester.pumpAndSettle();
+
+    expect(
+      tester.getSize(find.byType(CountryPicker)).height,
+      lessThanOrEqualTo(200),
+    );
+  });
+
+  desktopTestWidgets('applies a custom shape to the dialog', (tester) async {
+    const shape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(40)),
+    );
+    await tester.pumpWidget(
+      harness(
+        (context) => showCountryPickerDialog(context: context, shape: shape),
+      ),
+    );
+
+    await tester.tap(find.text('Open'));
+    await tester.pumpAndSettle();
+
+    final dialog = tester.widget<Dialog>(find.byType(Dialog));
+    expect(dialog.shape, shape);
   });
 }
