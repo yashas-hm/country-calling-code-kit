@@ -55,7 +55,7 @@ and returns `null` when the locale has no region component (previously it fell b
 ```dart
 Future<void> loadDefaultCountry() async {
   // Before (1.x) — a non-null Country was effectively guaranteed:
-  final Country country = (await getDefaultCountry())!;
+  //   final Country country = (await getDefaultCountry())!;
 
   // After (2.0.0) — handle the nullable result explicitly:
   final Country country = await getDefaultCountry() ?? countries.first;
