@@ -36,6 +36,10 @@ import 'package:flutter/material.dart';
 /// - [showCallCode]: Whether to show calling codes next to country names (defaults to true)
 /// - [search]: Whether to show the search bar (defaults to true)
 /// - [flagCornerRadius]: Corner Radius for flag images
+/// - [itemBorderRadius]: Corner radius for each country list item (defaults to 10)
+/// - [maxWidth]: Maximum width of the dialog (defaults to unconstrained)
+/// - [maxHeight]: Maximum height of the dialog (defaults to 80% of the screen height)
+/// - [shape]: Shape border of the dialog (defaults to a 20px rounded rectangle)
 ///
 /// Returns a [Future] that completes with the selected [Country] object
 /// or with `null` if the dialog is dismissed without selection.
@@ -51,16 +55,22 @@ Future<Country?> showCountryPickerDialog({
   bool showCallCode = true,
   bool search = true,
   double? flagCornerRadius,
+  double? itemBorderRadius,
+  double? maxWidth,
+  double? maxHeight,
+  ShapeBorder? shape,
 }) =>
     showAdaptiveDialog(
       context: context,
       barrierDismissible: true,
       builder: (ctx) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: shape ??
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.80,
-            minWidth: MediaQuery.of(context).size.shortestSide * 0.90,
+            maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.80,
+            maxWidth:
+                maxWidth ?? MediaQuery.of(context).size.shortestSide * 0.90,
           ),
           child: CountryPicker(
             onSelected: (country) => Navigator.of(
@@ -76,6 +86,7 @@ Future<Country?> showCountryPickerDialog({
             showCallCode: showCallCode,
             search: search,
             flagCornerRadius: flagCornerRadius,
+            itemBorderRadius: itemBorderRadius,
           ),
         ),
       ),

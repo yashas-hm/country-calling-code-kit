@@ -36,6 +36,10 @@ import 'package:flutter/material.dart';
 /// - [showCallCode]: Whether to show calling codes next to country names (defaults to true)
 /// - [search]: Whether to show the search bar (defaults to true)
 /// - [flagCornerRadius]: Corner Radius for flag images
+/// - [itemBorderRadius]: Corner radius for each country list item (defaults to 10)
+/// - [maxWidth]: Maximum width of the modal sheet (defaults to unconstrained)
+/// - [maxHeight]: Maximum height of the modal sheet (defaults to 85% of the screen height)
+/// - [shape]: Shape border of the modal sheet (defaults to 20px rounded top corners)
 ///
 /// Returns a [Future] that completes with the selected [Country] object
 /// or with `null` if the modal sheet is dismissed without selection.
@@ -51,19 +55,24 @@ Future<Country?> showCountryPickerModalSheet({
   bool showCallCode = true,
   bool search = true,
   double? flagCornerRadius,
+  double? itemBorderRadius,
+  double? maxWidth,
+  double? maxHeight,
+  ShapeBorder? shape,
 }) =>
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.85,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),
+        maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.85,
+      ).copyWith(maxWidth: maxWidth),
+      shape: shape ??
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
       builder: (ctx) => CountryPicker(
         onSelected: (country) => Navigator.of(ctx).pop(country),
         countryNameTextStyle: countryNameTextStyle,
@@ -76,5 +85,7 @@ Future<Country?> showCountryPickerModalSheet({
         showCallCode: showCallCode,
         search: search,
         flagCornerRadius: flagCornerRadius,
+        itemBorderRadius: itemBorderRadius,
+        noBottomPadding: true,
       ),
     );
