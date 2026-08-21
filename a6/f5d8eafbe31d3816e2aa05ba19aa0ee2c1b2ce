@@ -1,0 +1,14 @@
+README.md
+  h_489c0496f9f57d 58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "a6f5d8eafbe31d3816e2aa05ba19aa0ee2c1b2ce",
+  "prompts": {},
+  "humans": {
+    "h_489c0496f9f57d": {
+      "author": "Yashas H Majmudar <yashashm.dev@gmail.com>"
+    }
+  }
+}
