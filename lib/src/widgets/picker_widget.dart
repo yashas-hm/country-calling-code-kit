@@ -4,7 +4,7 @@ import 'package:country_calling_code_kit/src/core/constants.dart';
 import 'package:country_calling_code_kit/src/core/country.dart';
 import 'package:country_calling_code_kit/src/core/utils.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget that displays a searchable list of countries with their flags and calling codes.
 ///
@@ -192,8 +192,8 @@ class _CountryPickerState extends State<CountryPicker> {
               (country) =>
                   country.name.toLowerCase().startsWith(text.toLowerCase()) ||
                   country.countryCode.toString().toLowerCase().startsWith(
-                        text.toLowerCase(),
-                      ) ||
+                    text.toLowerCase(),
+                  ) ||
                   country.callCode.toLowerCase().startsWith(text.toLowerCase()),
             )
             .toList();
@@ -220,9 +220,8 @@ class _CountryPickerState extends State<CountryPicker> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: Theme.of(
-                      context,
-                    ).primaryColor.withValues(alpha: 0.4),
+                    color: Theme.of(context).primaryColor
+                        .withValues(alpha: 0.4),
                   ),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -276,14 +275,13 @@ class _CountryPickerState extends State<CountryPicker> {
                         borderRadius: BorderRadius.circular(50),
                         hoverColor:
                             defaultTargetPlatform == TargetPlatform.android ||
-                                    defaultTargetPlatform == TargetPlatform.iOS
-                                ? null
-                                : widget.hoverColor ??
-                                    Theme.of(context)
-                                        .colorScheme
-                                        .secondary
-                                        .withValues(alpha: 0.1),
-                        splashColor: widget.splashColor ??
+                                defaultTargetPlatform == TargetPlatform.iOS
+                            ? null
+                            : widget.hoverColor ??
+                                  Theme.of(context).colorScheme.secondary
+                                      .withValues(alpha: 0.1),
+                        splashColor:
+                            widget.splashColor ??
                             Theme.of(context).primaryColor,
                         onTap: () {
                           textEditController.clear();
@@ -296,10 +294,10 @@ class _CountryPickerState extends State<CountryPicker> {
                             size: 20,
                             color:
                                 Theme.of(context).textTheme.bodySmall?.color ??
-                                    (Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? Colors.black.withValues(alpha: 0.5)
-                                        : Colors.white.withValues(alpha: 0.5)),
+                                (Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.black.withValues(alpha: 0.5)
+                                    : Colors.white.withValues(alpha: 0.5)),
                           ),
                         ),
                       ),
@@ -312,15 +310,16 @@ class _CountryPickerState extends State<CountryPicker> {
                 itemCount: filteredCountries.length,
                 clipBehavior: Clip.antiAlias,
                 itemBuilder: (_, index) => InkWell(
-                  borderRadius:
-                      BorderRadius.circular(widget.itemBorderRadius ?? 10),
-                  hoverColor: defaultTargetPlatform == TargetPlatform.android ||
+                  borderRadius: BorderRadius.circular(
+                    widget.itemBorderRadius ?? 10,
+                  ),
+                  hoverColor:
+                      defaultTargetPlatform == TargetPlatform.android ||
                           defaultTargetPlatform == TargetPlatform.iOS
                       ? null
                       : widget.hoverColor ??
-                          Theme.of(
-                            context,
-                          ).colorScheme.secondary.withValues(alpha: 0.1),
+                            Theme.of(context).colorScheme.secondary
+                                .withValues(alpha: 0.1),
                   splashColor:
                       widget.splashColor ?? Theme.of(context).primaryColor,
                   onTap: () => widget.onSelected(filteredCountries[index]),
@@ -337,7 +336,8 @@ class _CountryPickerState extends State<CountryPicker> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(
-                              widget.flagCornerRadius ?? 0),
+                            widget.flagCornerRadius ?? 0,
+                          ),
                           child: Image.asset(
                             filteredCountries[index].flag,
                             fit: BoxFit.fill,
@@ -350,7 +350,8 @@ class _CountryPickerState extends State<CountryPicker> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               filteredCountries[index].name,
-                              style: widget.countryNameTextStyle ??
+                              style:
+                                  widget.countryNameTextStyle ??
                                   TextStyle(fontSize: 15),
                               softWrap: true,
                               maxLines: 3,
@@ -365,7 +366,8 @@ class _CountryPickerState extends State<CountryPicker> {
                             child: Text(
                               filteredCountries[index].callCode,
                               textAlign: TextAlign.left,
-                              style: widget.countryCallCodeTextStyle ??
+                              style:
+                                  widget.countryCallCodeTextStyle ??
                                   TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.bold,

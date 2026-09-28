@@ -2,7 +2,7 @@ library;
 
 import 'package:country_calling_code_kit/src/core/country.dart';
 import 'package:country_calling_code_kit/src/widgets/picker_widget.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Shows a modal sheet with a country picker.
 ///
@@ -59,33 +59,33 @@ Future<Country?> showCountryPickerModalSheet({
   double? maxWidth,
   double? maxHeight,
   ShapeBorder? shape,
-}) =>
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      constraints: BoxConstraints(
-        maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.85,
-      ).copyWith(maxWidth: maxWidth),
-      shape: shape ??
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-      builder: (ctx) => CountryPicker(
-        onSelected: (country) => Navigator.of(ctx).pop(country),
-        countryNameTextStyle: countryNameTextStyle,
-        countryCallCodeTextStyle: countryCallCodeTextStyle,
-        imageSize: imageSize,
-        splashColor: splashColor,
-        hoverColor: hoverColor,
-        searchFilter: searchFilter,
-        preferredCountries: preferredCountries,
-        showCallCode: showCallCode,
-        search: search,
-        flagCornerRadius: flagCornerRadius,
-        itemBorderRadius: itemBorderRadius,
-        noBottomPadding: true,
+}) => showModalBottomSheet(
+  context: context,
+  isScrollControlled: true,
+  constraints: BoxConstraints(
+    maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.85,
+  ).copyWith(maxWidth: maxWidth),
+  shape:
+      shape ??
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
       ),
-    );
+  builder: (ctx) => CountryPicker(
+    onSelected: (country) => Navigator.of(ctx).pop(country),
+    countryNameTextStyle: countryNameTextStyle,
+    countryCallCodeTextStyle: countryCallCodeTextStyle,
+    imageSize: imageSize,
+    splashColor: splashColor,
+    hoverColor: hoverColor,
+    searchFilter: searchFilter,
+    preferredCountries: preferredCountries,
+    showCallCode: showCallCode,
+    search: search,
+    flagCornerRadius: flagCornerRadius,
+    itemBorderRadius: itemBorderRadius,
+    noBottomPadding: true,
+  ),
+);

@@ -1,5 +1,5 @@
 import 'package:country_calling_code_kit/country_calling_code_kit.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../support/desktop_test_widgets.dart';
@@ -18,8 +18,9 @@ void main() {
     );
   }
 
-  desktopTestWidgets('opens a dialog containing the CountryPicker',
-      (tester) async {
+  desktopTestWidgets('opens a dialog containing the CountryPicker', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       harness((context) => showCountryPickerDialog(context: context)),
     );
@@ -51,33 +52,34 @@ void main() {
     expect(find.byType(Dialog), findsNothing);
   });
 
-  desktopTestWidgets('resolves with null when dismissed by tapping the barrier',
-      (
+  desktopTestWidgets(
+    'resolves with null when dismissed by tapping the barrier',
+    (tester) async {
+      Country? result;
+      bool completed = false;
+      await tester.pumpWidget(
+        harness((context) async {
+          result = await showCountryPickerDialog(context: context);
+          completed = true;
+        }),
+      );
+
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+      expect(find.byType(Dialog), findsOneWidget);
+
+      await tester.tapAt(const Offset(10, 10));
+      await tester.pumpAndSettle();
+
+      expect(completed, isTrue);
+      expect(result, isNull);
+      expect(find.byType(Dialog), findsNothing);
+    },
+  );
+
+  desktopTestWidgets('forwards preferredCountries to the picker', (
     tester,
   ) async {
-    Country? result;
-    bool completed = false;
-    await tester.pumpWidget(
-      harness((context) async {
-        result = await showCountryPickerDialog(context: context);
-        completed = true;
-      }),
-    );
-
-    await tester.tap(find.text('Open'));
-    await tester.pumpAndSettle();
-    expect(find.byType(Dialog), findsOneWidget);
-
-    await tester.tapAt(const Offset(10, 10));
-    await tester.pumpAndSettle();
-
-    expect(completed, isTrue);
-    expect(result, isNull);
-    expect(find.byType(Dialog), findsNothing);
-  });
-
-  desktopTestWidgets('forwards preferredCountries to the picker',
-      (tester) async {
     await tester.pumpWidget(
       harness(
         (context) => showCountryPickerDialog(
@@ -125,8 +127,9 @@ void main() {
     );
   });
 
-  desktopTestWidgets('constrains the dialog height to maxHeight',
-      (tester) async {
+  desktopTestWidgets('constrains the dialog height to maxHeight', (
+    tester,
+  ) async {
     // Default height here would be screenHeight * 0.80 = 480, so 200 proves
     // the constraint is applied.
     await tester.pumpWidget(
