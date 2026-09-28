@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:country_calling_code_kit/country_calling_code_kit.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/scheduler.dart';
 
 void main() {

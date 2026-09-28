@@ -4,7 +4,7 @@ import 'package:country_calling_code_kit/src/core/constants.dart';
 import 'package:country_calling_code_kit/src/core/country.dart';
 import 'package:country_calling_code_kit/src/core/utils.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget that displays a searchable list of countries with their flags and calling codes.
 ///
