@@ -1,0 +1,38 @@
+example/analysis_options.yaml
+  h_489c0496f9f57d 1-9
+pubspec.yaml
+  h_489c0496f9f57d 15,20
+  h_489c0496f9f57d 3
+analysis_options.yaml
+  h_489c0496f9f57d 1-9,11-13
+  h_489c0496f9f57d 14-15
+example/pubspec.yaml
+  h_489c0496f9f57d 7,15
+CHANGELOG.md
+  h_489c0496f9f57d 1-12
+example/lib/main.dart
+  h_489c0496f9f57d 5
+lib/src/widgets/picker_dialog.dart
+  h_489c0496f9f57d 5
+lib/src/widgets/picker_sheet.dart
+  h_489c0496f9f57d 5
+lib/src/widgets/picker_widget.dart
+  h_489c0496f9f57d 7
+test/widgets/picker_dialog_test.dart
+  h_489c0496f9f57d 2
+test/widgets/picker_sheet_test.dart
+  h_489c0496f9f57d 2
+test/widgets/picker_widget_test.dart
+  h_489c0496f9f57d 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "94cfb9fe2ab5ffacb7a3500c462e1e4a50ac9816",
+  "prompts": {},
+  "humans": {
+    "h_489c0496f9f57d": {
+      "author": "Yashas H Majmudar <yashashm.dev@gmail.com>"
+    }
+  }
+}
