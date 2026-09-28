@@ -1,0 +1,28 @@
+lib/src/core/country.dart
+  h_489c0496f9f57d 297-299
+lib/src/widgets/picker_dialog.dart
+  h_489c0496f9f57d 62-72,74-90
+lib/src/widgets/picker_sheet.dart
+  h_489c0496f9f57d 62-74,76-91
+lib/src/widgets/picker_widget.dart
+  h_489c0496f9f57d 195-196,223-224,278-284,297-300,313-317,321-322,339-340,353-354,369-370
+test/unit/utils_test.dart
+  h_489c0496f9f57d 62-64,66,68-70
+test/widgets/picker_dialog_test.dart
+  h_489c0496f9f57d 21-23,55-80,130-132
+test/widgets/picker_sheet_test.dart
+  h_489c0496f9f57d 21-26,28-29,31-33,77-79,120-123,126-128,141-144
+test/widgets/picker_widget_test.dart
+  h_489c0496f9f57d 9-11,15-17,19-22,24-26,36-38,40-41,43-47,49-51,64-66,116-118,160-162,175-177,187-189,217-219,234-236,240-242,245-247,253,305-307,324-326,339-341,348-350,355-359,361-371
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "372a0a54c8e19df40caa1f2d68fb653bbce97981",
+  "prompts": {},
+  "humans": {
+    "h_489c0496f9f57d": {
+      "author": "Yashas H Majmudar <yashashm.dev@gmail.com>"
+    }
+  }
+}
