@@ -59,35 +59,32 @@ Future<Country?> showCountryPickerDialog({
   double? maxWidth,
   double? maxHeight,
   ShapeBorder? shape,
-}) =>
-    showAdaptiveDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (ctx) => Dialog(
-        shape: shape ??
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.80,
-            maxWidth:
-                maxWidth ?? MediaQuery.of(context).size.shortestSide * 0.90,
-          ),
-          child: CountryPicker(
-            onSelected: (country) => Navigator.of(
-              ctx,
-            ).pop(country),
-            countryNameTextStyle: countryNameTextStyle,
-            countryCallCodeTextStyle: countryCallCodeTextStyle,
-            imageSize: imageSize,
-            splashColor: splashColor,
-            hoverColor: hoverColor,
-            searchFilter: searchFilter,
-            preferredCountries: preferredCountries,
-            showCallCode: showCallCode,
-            search: search,
-            flagCornerRadius: flagCornerRadius,
-            itemBorderRadius: itemBorderRadius,
-          ),
-        ),
+}) => showAdaptiveDialog(
+  context: context,
+  barrierDismissible: true,
+  builder: (ctx) => Dialog(
+    shape:
+        shape ??
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    child: ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.80,
+        maxWidth: maxWidth ?? MediaQuery.of(context).size.shortestSide * 0.90,
       ),
-    );
+      child: CountryPicker(
+        onSelected: (country) => Navigator.of(ctx).pop(country),
+        countryNameTextStyle: countryNameTextStyle,
+        countryCallCodeTextStyle: countryCallCodeTextStyle,
+        imageSize: imageSize,
+        splashColor: splashColor,
+        hoverColor: hoverColor,
+        searchFilter: searchFilter,
+        preferredCountries: preferredCountries,
+        showCallCode: showCallCode,
+        search: search,
+        flagCornerRadius: flagCornerRadius,
+        itemBorderRadius: itemBorderRadius,
+      ),
+    ),
+  ),
+);

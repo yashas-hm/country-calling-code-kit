@@ -59,33 +59,33 @@ Future<Country?> showCountryPickerModalSheet({
   double? maxWidth,
   double? maxHeight,
   ShapeBorder? shape,
-}) =>
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      constraints: BoxConstraints(
-        maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.85,
-      ).copyWith(maxWidth: maxWidth),
-      shape: shape ??
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-      builder: (ctx) => CountryPicker(
-        onSelected: (country) => Navigator.of(ctx).pop(country),
-        countryNameTextStyle: countryNameTextStyle,
-        countryCallCodeTextStyle: countryCallCodeTextStyle,
-        imageSize: imageSize,
-        splashColor: splashColor,
-        hoverColor: hoverColor,
-        searchFilter: searchFilter,
-        preferredCountries: preferredCountries,
-        showCallCode: showCallCode,
-        search: search,
-        flagCornerRadius: flagCornerRadius,
-        itemBorderRadius: itemBorderRadius,
-        noBottomPadding: true,
+}) => showModalBottomSheet(
+  context: context,
+  isScrollControlled: true,
+  constraints: BoxConstraints(
+    maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.85,
+  ).copyWith(maxWidth: maxWidth),
+  shape:
+      shape ??
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
       ),
-    );
+  builder: (ctx) => CountryPicker(
+    onSelected: (country) => Navigator.of(ctx).pop(country),
+    countryNameTextStyle: countryNameTextStyle,
+    countryCallCodeTextStyle: countryCallCodeTextStyle,
+    imageSize: imageSize,
+    splashColor: splashColor,
+    hoverColor: hoverColor,
+    searchFilter: searchFilter,
+    preferredCountries: preferredCountries,
+    showCallCode: showCallCode,
+    search: search,
+    flagCornerRadius: flagCornerRadius,
+    itemBorderRadius: itemBorderRadius,
+    noBottomPadding: true,
+  ),
+);

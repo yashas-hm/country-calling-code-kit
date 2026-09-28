@@ -18,19 +18,19 @@ void main() {
     );
   }
 
-  desktopTestWidgets('opens a modal bottom sheet containing the CountryPicker',
-      (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      harness((context) => showCountryPickerModalSheet(context: context)),
-    );
+  desktopTestWidgets(
+    'opens a modal bottom sheet containing the CountryPicker',
+    (tester) async {
+      await tester.pumpWidget(
+        harness((context) => showCountryPickerModalSheet(context: context)),
+      );
 
-    await tester.tap(find.text('Open'));
-    await tester.pumpAndSettle();
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
 
-    expect(find.text('Afghanistan'), findsOneWidget);
-  });
+      expect(find.text('Afghanistan'), findsOneWidget);
+    },
+  );
 
   desktopTestWidgets('resolves the returned future with the selected country', (
     tester,
@@ -74,8 +74,9 @@ void main() {
     expect(result, isNull);
   });
 
-  desktopTestWidgets('forwards preferredCountries to the picker',
-      (tester) async {
+  desktopTestWidgets('forwards preferredCountries to the picker', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       harness(
         (context) => showCountryPickerModalSheet(
@@ -116,12 +117,15 @@ void main() {
     await tester.tap(find.text('Open'));
     await tester.pumpAndSettle();
 
-    expect(tester.getSize(find.byType(CountryPicker)).width,
-        lessThanOrEqualTo(200));
+    expect(
+      tester.getSize(find.byType(CountryPicker)).width,
+      lessThanOrEqualTo(200),
+    );
   });
 
-  desktopTestWidgets('constrains the sheet height to maxHeight',
-      (tester) async {
+  desktopTestWidgets('constrains the sheet height to maxHeight', (
+    tester,
+  ) async {
     // Default height here would be screenHeight * 0.85 = 510, so 250 proves
     // the constraint is applied.
     await tester.pumpWidget(
@@ -134,8 +138,10 @@ void main() {
     await tester.tap(find.text('Open'));
     await tester.pumpAndSettle();
 
-    expect(tester.getSize(find.byType(CountryPicker)).height,
-        lessThanOrEqualTo(250));
+    expect(
+      tester.getSize(find.byType(CountryPicker)).height,
+      lessThanOrEqualTo(250),
+    );
   });
 
   desktopTestWidgets('applies a custom shape to the sheet', (tester) async {

@@ -294,7 +294,7 @@ enum CountryCode {
   /// @param value The string representation of the country code
   /// @return The matching [CountryCode] or the first enum value if no match is found
   static CountryCode fromString(String? value) => CountryCode.values.firstWhere(
-        (element) => element.toString() == value?.toLowerCase(),
-        orElse: () => CountryCode.values.first,
-      );
+    (element) => element.toString() == value?.toLowerCase(),
+    orElse: () => CountryCode.values.first,
+  );
 }

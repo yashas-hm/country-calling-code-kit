@@ -59,13 +59,14 @@ void main() {
     });
 
     test(
-        'falls back to the first country when the locale region is unrecognized',
-        () async {
-      mockLocale(const Locale('en', 'ZZ'));
+      'falls back to the first country when the locale region is unrecognized',
+      () async {
+        mockLocale(const Locale('en', 'ZZ'));
 
-      final result = await getDefaultCountry();
+        final result = await getDefaultCountry();
 
-      expect(result?.countryCode, CountryCode.values.first);
-    });
+        expect(result?.countryCode, CountryCode.values.first);
+      },
+    );
   });
 }
